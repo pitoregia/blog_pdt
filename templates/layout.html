@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <title>{% block title %} {% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -18,14 +18,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">UNet</a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">Blog</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/">Home</a>
                     </li>
-                    {% if session['name'] %}
+                    {% if session and session.get('username') %}
                     <li>
                         <a href="/logout">Logout</a>
                     </li>
@@ -36,12 +36,17 @@
                     <li>
                         <a href="/register">Register</a>
                     </li>
+                    
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-    {% block content %} {% endblock %}
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
